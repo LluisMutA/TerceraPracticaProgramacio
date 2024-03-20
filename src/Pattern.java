@@ -12,12 +12,12 @@ public class Pattern {
                 component.tipo = Component.tipoComponent.QMARK;
                 components.add(component);
                 continue;
-            } else if (c == '%' && i == 0) {
+            } else if (c == '%' && i == 0) { // redundant (esta el find)
                 Component component = new Component();
                 component.tipo = Component.tipoComponent.BOL;
                 components.add(component);
                 continue;
-            } else if (c == '$' && i == patString.length()-1) {
+            } else if (c == '$' && i == patString.length()-1) { // Rendundant (find)
                 Component component = new Component();
                 component.tipo = Component.tipoComponent.EOL;
                 components.add(component);
@@ -39,7 +39,7 @@ public class Pattern {
                 components.add(component);
                 i++;
                 continue;
-            }else {
+            }else { // Else simple, antes tenia cpmprovar si eres un char entre segons quins valor y comprobar si era un espai, per pasar el seguents tests de positions y charclasses mha dont molt de problemes, aixi pasen
                 Component component = new Component();
                 component.tipo = Component.tipoComponent.CHAR;
                 component.ch = c;

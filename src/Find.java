@@ -25,7 +25,7 @@ public class Find {
     private boolean tryMatch(Pattern pat, int pos){
         for (int j = 0; j < pat.components.size(); j++) {
             if (j + pos >= this.text.length()) {
-                if (pat.components.get(j).tipo == Component.tipoComponent.EOL){
+                if (pat.components.get(j).tipo == Component.tipoComponent.EOL){ // Comprovam que sigui un EOL ---> j perque no surti del limit
                     return true;
                 }
                 return false;
@@ -35,13 +35,13 @@ public class Find {
             Component component = pat.components.get(j);
 
             if (component.tipo == Component.tipoComponent.BOL){
-                if (pos != 0){
+                if (pos != 0){ // Canviam el tipos si no es BOL a Char, corregir pattern
                     component.tipo = Component.tipoComponent.CHAR;
                 }
-                pos--;
+                pos--; // j- pos?
             }
             if (component.tipo == Component.tipoComponent.EOL){
-                if (j != this.text.length()-1){
+                if (j != this.text.length()-1){  // Si no esta al final tornam fals directe
                     return false;
                 }
             }
@@ -51,15 +51,15 @@ public class Find {
             if (component.tipo == Component.tipoComponent.SET){
                 boolean match = false; // Comprovam si coincideix per donar true i acabar el bucle
                 for (int k = 0; k < component.set.length(); k++) {
-                    char setChar = component.set.charAt(k);
-                    if (setChar == '-' && k != 0 && k != component.set.length() - 1) {
-                        char startRange = component.set.charAt(k - 1);
-                        char endRange = component.set.charAt(k + 1);
-                        if (c >= startRange && c <= endRange) {
+                    char comprovaChar = component.set.charAt(k);
+                    if (comprovaChar == '-' && k != 0 && k != component.set.length() - 1) {
+                        char esInici = component.set.charAt(k - 1);
+                        char esFinal = component.set.charAt(k + 1);
+                        if (c >= esInici && c <= esFinal) {
                             match = true;
                             break;
                         }
-                    } else if (c == setChar) {
+                    } else if (c == comprovaChar) {
                         match = true;
                         break;
                     }
@@ -71,6 +71,13 @@ public class Find {
     }
 
     public String capture(String pat) {
+        Pattern p = new Pattern(pat);
+        for (int i = 0; i < this.text.length(); i++) {
+            if (tryMatch(p, i)) {
+                int end = i + pat.length() -1; // -1?
+                return this.text.substring(i, end);
+            }
+        }
         return null;
     }
 }
