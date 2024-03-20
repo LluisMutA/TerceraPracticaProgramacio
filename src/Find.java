@@ -1,7 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class Find {
     private String text;
 
@@ -29,7 +28,6 @@ public class Find {
                 if (pat.components.get(j).tipo == Component.tipoComponent.EOL){
                     return true;
                 }
-
                 return false;
             }
 
@@ -37,9 +35,9 @@ public class Find {
             Component component = pat.components.get(j);
 
             if (component.tipo == Component.tipoComponent.BOL){
-               if (pos != 0){
-                   component.tipo = Component.tipoComponent.CHAR;
-               }
+                if (pos != 0){
+                    component.tipo = Component.tipoComponent.CHAR;
+                }
                 pos--;
             }
             if (component.tipo == Component.tipoComponent.EOL){
@@ -49,6 +47,24 @@ public class Find {
             }
             if (component.tipo == Component.tipoComponent.CHAR){
                 if (c != component.ch) return false;
+            }
+            if (component.tipo == Component.tipoComponent.SET){
+                boolean match = false; // Comprovam si coincideix per donar true i acabar el bucle
+                for (int k = 0; k < component.set.length(); k++) {
+                    char setChar = component.set.charAt(k);
+                    if (setChar == '-' && k != 0 && k != component.set.length() - 1) {
+                        char startRange = component.set.charAt(k - 1);
+                        char endRange = component.set.charAt(k + 1);
+                        if (c >= startRange && c <= endRange) {
+                            match = true;
+                            break;
+                        }
+                    } else if (c == setChar) {
+                        match = true;
+                        break;
+                    }
+                }
+                if (!match) return false;
             }
         }
         return true;
