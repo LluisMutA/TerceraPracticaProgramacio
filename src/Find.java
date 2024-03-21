@@ -23,6 +23,9 @@ public class Find {
     }
 
         private boolean tryMatch(Pattern pat, int pos){
+        int primeraPos = pos;
+        int darreraPos = this.text.length();
+
         for (int j = 0; j < pat.components.size(); j++) {
             if (j + pos >= this.text.length()) {
                 if (pat.components.get(j).tipo == Component.tipoComponent.EOL){ // Comprovam que sigui un EOL ---> j perque no surti del limit
@@ -82,12 +85,12 @@ public class Find {
         Pattern p = new Pattern(pat);
         for (int i = 0; i < this.text.length(); i++) {
             if (tryMatch(p, i)) {
-                int end = i + pat.length();
+                int end = pat.length();
                 if (p.components.get(p.components.size()-1).tipo == Component.tipoComponent.EOL) {
                     end = this.text.length(); // Si es eol
                 }else {
-                    end = Math.min(end, this.text.length()-1); //
-//                int end = i + pat.length(); // -1 si el metode no es eol pero no el darrer
+                 end = i + pat.length(); // -1 si el metode no es eol pero no el darrer
+                    //   end = Math.min(end, this.text.length()-1);
 //                return this.text.substring(i, end);
                 }return this.text.substring(i, end);
             }

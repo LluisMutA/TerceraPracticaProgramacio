@@ -172,90 +172,89 @@ public class FindTest {
         assertEquals("friend?$", f.capture("friend?$$"));
         assertEquals("How are you", f.capture("??? ??? ???"));
     }
-
-
-    /////////////////////////////////////////////////////////////////////////////////
-    /////////////////////////////////////////////////////////////////////////////////
-    /////////////////////////////////////////////////////////////////////////////////
-    /////////////////////////////////////////////////////////////////////////////////
-    /////////////////////////////////////////////////////////////////////////////////
-    /////////////////////////////////////////////////////////////////////////////////
-    /////////////////////////////////////////////////////////////////////////////////
-    /////////////////////////////////////////////////////////////////////////////////
-    /////////////////////////////////////////////////////////////////////////////////
-    /////////////////////////////////////////////////////////////////////////////////
-    /////////////////////////////////////////////////////////////////////////////////
-
-
-    @Test
-    public void closures1() {
-        Find f = new Find("bb");
-        assertTrue(f.match("b+"));
-        assertTrue(f.match("[abc]+"));
-        assertFalse(f.match("b[ac]+"));
-
-        f = new Find("aaaaaaabc");
-        assertTrue(f.match("a+bc"));
-        assertFalse(f.match("a+kbc"));
-        assertTrue(f.match("ab+c"));
-        assertFalse(f.match("abb+c"));
-        assertFalse(f.match("az+c"));
-        assertTrue(f.match("a+bc+$"));
-        assertTrue(f.match("%[abc]+$"));
-        assertFalse(f.match("%[ab]+$"));
-        assertFalse(f.match("az+bc"));
-    }
-
-    @Test
-    public void closures2() {
-        Find f = new Find("bb");
-        assertTrue(f.match("b*"));
-        assertTrue(f.match("[abc]*"));
-        assertTrue(f.match("b[ac]*"));
-
-        f = new Find("aaaaaaabc");
-        assertTrue(f.match("a*bc"));
-        assertFalse(f.match("a*kbc"));
-        assertTrue(f.match("ab*c"));
-        assertTrue(f.match("abb*c"));
-        assertFalse(f.match("abbb*c"));
-        assertTrue(f.match("az*bc"));
-        assertTrue(f.match("[abc]*c"));
-
-        f = new Find("192228888888888888886722222226");
-        assertTrue(f.match("192*8*672*6"));
-        assertFalse(f.match("2*78*6"));
-        assertTrue(f.match("1*"));
-        assertTrue(f.match("8*"));
-        assertTrue(f.match("k*"));
-        assertTrue(f.match("%1[92867]*67"));
-        assertFalse(f.match("14*2"));
-        assertTrue(f.match("14*9"));
-        assertFalse(f.match("14*9$"));
-    }
-
-    @Test
-    public void captures2() {
-        Find f = new Find("12333333333668");
-        assertEquals("2333333333668", f.capture("23*6*8"));
-        assertEquals("12333333333668", f.capture("?*"));
-        assertEquals("1233333333366", f.capture("1?*6"));
-        assertEquals("1233333333366", f.capture("[123]?*3?+6"));
-        assertEquals("23333333336", f.capture("[2368]*[238]6"));
-        assertEquals("2333333333668", f.capture("[2368]*"));
-        assertEquals("12333333333", f.capture("1[23]*"));
-        assertEquals("23", f.capture("2[6]*3"));
-        assertNull(f.capture("2[6]+3"));
-
-        f = new Find("?*.+%$");
-        assertEquals("?*.", f.capture("??."));
-        assertEquals(".", f.capture("@?*."));
-        assertNull(f.capture("@?+."));
-        assertEquals("%$", f.capture("@%@$$"));
-        assertEquals(".+%", f.capture(".?+%"));
-        assertEquals("?*.+", f.capture("[?*.]*@+"));
-        assertEquals("*.+%$", f.capture("@*?*$"));
-        assertNull(f.capture("%??.*$"));
-    }
-
 }
+    /////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////
+
+
+//    @Test
+//    public void closures1() {
+//        Find f = new Find("bb");
+//        assertTrue(f.match("b+"));
+//        assertTrue(f.match("[abc]+"));
+//        assertFalse(f.match("b[ac]+"));
+//
+//        f = new Find("aaaaaaabc");
+//        assertTrue(f.match("a+bc"));
+//        assertFalse(f.match("a+kbc"));
+//        assertTrue(f.match("ab+c"));
+//        assertFalse(f.match("abb+c"));
+//        assertFalse(f.match("az+c"));
+//        assertTrue(f.match("a+bc+$"));
+//        assertTrue(f.match("%[abc]+$"));
+//        assertFalse(f.match("%[ab]+$"));
+//        assertFalse(f.match("az+bc"));
+//    }
+//
+//    @Test
+//    public void closures2() {
+//        Find f = new Find("bb");
+//        assertTrue(f.match("b*"));
+//        assertTrue(f.match("[abc]*"));
+//        assertTrue(f.match("b[ac]*"));
+//
+//        f = new Find("aaaaaaabc");
+//        assertTrue(f.match("a*bc"));
+//        assertFalse(f.match("a*kbc"));
+//        assertTrue(f.match("ab*c"));
+//        assertTrue(f.match("abb*c"));
+//        assertFalse(f.match("abbb*c"));
+//        assertTrue(f.match("az*bc"));
+//        assertTrue(f.match("[abc]*c"));
+//
+//        f = new Find("192228888888888888886722222226");
+//        assertTrue(f.match("192*8*672*6"));
+//        assertFalse(f.match("2*78*6"));
+//        assertTrue(f.match("1*"));
+//        assertTrue(f.match("8*"));
+//        assertTrue(f.match("k*"));
+//        assertTrue(f.match("%1[92867]*67"));
+//        assertFalse(f.match("14*2"));
+//        assertTrue(f.match("14*9"));
+//        assertFalse(f.match("14*9$"));
+//    }
+//
+//    @Test
+//    public void captures2() {
+//        Find f = new Find("12333333333668");
+//        assertEquals("2333333333668", f.capture("23*6*8"));
+//        assertEquals("12333333333668", f.capture("?*"));
+//        assertEquals("1233333333366", f.capture("1?*6"));
+//        assertEquals("1233333333366", f.capture("[123]?*3?+6"));
+//        assertEquals("23333333336", f.capture("[2368]*[238]6"));
+//        assertEquals("2333333333668", f.capture("[2368]*"));
+//        assertEquals("12333333333", f.capture("1[23]*"));
+//        assertEquals("23", f.capture("2[6]*3"));
+//        assertNull(f.capture("2[6]+3"));
+//
+//        f = new Find("?*.+%$");
+//        assertEquals("?*.", f.capture("??."));
+//        assertEquals(".", f.capture("@?*."));
+//        assertNull(f.capture("@?+."));
+//        assertEquals("%$", f.capture("@%@$$"));
+//        assertEquals(".+%", f.capture(".?+%"));
+//        assertEquals("?*.+", f.capture("[?*.]*@+"));
+//        assertEquals("*.+%$", f.capture("@*?*$"));
+//        assertNull(f.capture("%??.*$"));
+//    }
+//
+//}

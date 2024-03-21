@@ -12,7 +12,7 @@ public class Pattern {
                 component.tipo = Component.tipoComponent.QMARK;
                 components.add(component);
                 continue;
-            } else if (c == '%' && i == 0) { // redundant (esta el find)
+            } else if (c == '%' && i == 0) { // necesari possiitions
                 Component component = new Component();
                 component.tipo = Component.tipoComponent.BOL;
                 components.add(component);
